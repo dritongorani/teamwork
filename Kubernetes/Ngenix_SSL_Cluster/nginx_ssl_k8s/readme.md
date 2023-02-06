@@ -96,3 +96,5 @@ spec:
 ***
 
 ### Cert-manager adds certificates and certificate issuers as resource types in Kubernetes clusters, and simplifies the process of obtaining, renewing and using those certificates
+
+Note: We can verify our certificate with our own isseur or clusster issuer, for security its better to use our own Issuer to verify these certs.
