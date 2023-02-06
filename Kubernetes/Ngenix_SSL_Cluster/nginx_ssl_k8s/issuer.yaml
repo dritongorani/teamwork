@@ -1,14 +1,14 @@
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: letencrypt-production
+  name: letsencrypt-stagging
   namespace: driton
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
     email: tony@gmail.com
     privateKeySecretRef:
-      name: letencrypt-production
+      name: dritonprivate
     solvers:
     - http01:
         ingress:

@@ -20,3 +20,22 @@ spec:
         - name: exposehttp
           containerPort: 80
           protocol: TCP
+
+---
+
+
+##Deployment service
+apiVersion: v1
+kind: Service
+metadata:
+  name: dritonservice
+  namespace: driton
+spec:
+  # type: LoadBalancer
+  selector:
+    app: nginx
+  ports:
+    - name: httpd
+      protocol: TCP
+      port: 80
+      targetPort: 80

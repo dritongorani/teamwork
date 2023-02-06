@@ -1,15 +1,15 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: dritoningress
-  namespace: driton
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-    cert-manager.io/issuer: letencrypt-production
+    cert-manager.io/issuer: "letsencrypt-stagging"
+  name: dritonissuer
+  namespace: driton
 spec:
   ingressClassName: nginx
   rules:
-  - host: dritontest.sandbox.aws.teamwork.net
+  - host: tonytest.sandbox.aws.teamwork.net
     http:
       paths:
       - path: /
@@ -22,8 +22,8 @@ spec:
 
   tls:
     - hosts:
-      - dritontest.sandbox.aws.teamwork.net
-      secretName: dritonsecret2
+      - tonytest.sandbox.aws.teamwork.net
+      secretName: drsecretcertificat
 ---
 
 ###Ingress controller
