@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: apache2
-        image: httpd
+        image: nginx
         ports:
         - name: exposehttp
           containerPort: 80
