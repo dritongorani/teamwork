@@ -1,4 +1,6 @@
 
+
+## issuer and ingress should be deployed in same name space: argocd
 ### Install argoCD on your Cluster
 
 `kubectl create namespace argocd
