@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: "letsencrypt-stagging"
+  name: dritonissuer
+  namespace: dritontest
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: drtestngenixargocd.sandbox.aws.teamwork.net
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: dritonservice1
+            port:
+              number: 80
+
+  tls:
+    - hosts:
+      - drtestngenixargocd.sandbox.aws.teamwork.net
+      secretName: drsecretcertificat
+---
+
+###Ingress controller
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: nginx
+spec:
+  controller: k8s.io/ingress-nginx
