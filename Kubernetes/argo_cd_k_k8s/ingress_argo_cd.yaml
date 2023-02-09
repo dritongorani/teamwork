@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: argocd-server-ingress
-  namespace: argocd
+  namespace: dritontest
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/ingress.class: nginx
@@ -15,7 +15,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: drargocd.sandbox.aws.teamwork.net
+  - host: drtestngenixargocd.sandbox.aws.teamwork.net
     http:
       paths:
       - path: /
@@ -28,7 +28,7 @@ spec:
         
   tls:
   - hosts:
-    - drargocd.sandbox.aws.teamwork.net
+    - drtestngenixargocd.sandbox.aws.teamwork.net
     secretName: argocd-secret # do not change, this is provided by Argo CD
   
 ---
