@@ -52,6 +52,9 @@ check installation logs: kubectl logs -f deployments/awx-operator-controller-man
 ##Expose your awx operator using a tunnel: 
 minikube service <service-name of your awx> --url
 
+### Secret awx decode your password using:
+
+echo <your base64 code> | base64 --decode
 
 Step5: Enable external access
 ############################################################
