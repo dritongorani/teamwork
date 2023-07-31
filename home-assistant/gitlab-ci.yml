@@ -1,0 +1,82 @@
+---
+
+stages:
+  - validate
+  - plan
+  - apply
+  - destroy
+  - ansible
+
+image:
+  name: hashicorp/terraform:light
+  entrypoint:
+    - '/usr/bin/env'
+    - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+
+variables:
+  # aws custom info for s3
+    TF_FILES_DIRECTORY: "terraform/"
+    AWS_ACCESS_KEY_ID: "${accesskeyaws_driton}"
+    AWS_DEFAULT_REGION: "eu-west-1"
+    AWS_SECRET_ACCESS_KEY: "${secretkey_driton}"
+  # PLAN: dgorani.tfplan
+  # STATE: dgorani.tfstate
+  
+cache:
+  paths:
+    - .terraform
+
+before_script:
+    - cd "$TF_FILES_DIRECTORY"
+    - export TF_VAR_accesskeyaws_driton=${accesskeyaws_driton}
+    - export TF_VAR_secretkey_driton=${secretkey_driton}
+    - rm -rf .terraform
+    - terraform --version
+    - terraform init
+
+
+validate:
+  stage: validate
+  script:
+    - terraform validate
+  when: always
+  
+plan:
+  stage: plan
+  script:
+    - terraform plan 
+  dependencies:
+    - validate
+  # artifacts:
+  #   name: 
+  #   paths:
+  #     - 
+  #     - 
+  
+apply:
+  stage: apply
+  script:
+    - terraform apply --auto-approve 
+  dependencies:
+    - plan
+  # when: manual
+  # artifacts:
+  #   name: apply
+  #   paths:
+  
+
+destroy:
+  stage: destroy
+  script: 
+    - terraform destroy --auto-approve 
+  when: manual
+  dependencies:
+    - apply
+
+
+# ansible:
+#   stage: ansible
+#   script:
+#     -
+#     -
+#   when: 
